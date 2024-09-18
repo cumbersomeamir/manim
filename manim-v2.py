@@ -12,20 +12,22 @@ def generate_manim_code(topic):
       model="gpt-4o",
       messages=[
         {"role": "system", "content": "You are a super creative Python programmer specialized in the Manim library."},
-        {"role": "user", "content": "Please write a Manim script that creates an animation about " + str(topic) + ". Provide only the code without any explanations."}
+        {"role": "user", "content": "Please write a Manim script that creates an animation about " + str(topic) + ". Provide only the code and nothing else no ```python or ``` only pure python code which will be executed"}
       ]
     )
-    return completion['choices'][0]['message']['content']
+    response = completion.choices[0].message.content
+    return response
 
 def generate_corrected_code(previous_code, error_message):
     completion = client.chat.completions.create(
       model="gpt-4o",
       messages=[
         {"role": "system", "content": "You are a skilled Python programmer and debugger specialized in the Manim library."},
-        {"role": "user", "content": f"The following Manim script has an error:\n\n{previous_code}\n\nThe error message is:\n\n{error_message}\n\nPlease provide a corrected version of the script. Provide only the corrected code without any explanations."}
+        {"role": "user", "content": f"The following Manim script has an error:\n\n{previous_code}\n\nThe error message is:\n\n{error_message}\n\nPlease provide a corrected version of the script. Provide only the code and nothing else no ```python or ``` only pure python code which will be executed"}
       ]
     )
-    return completion['choices'][0]['message']['content']
+    response = completion.choices[0].message.content
+    return response
 
 def save_code_to_file(code, filename):
     with open(filename, 'w') as f:
