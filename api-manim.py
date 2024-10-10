@@ -20,6 +20,7 @@ def generate_manim_code(topic):
         ]
     )
     response = completion.choices[0].message.content
+    print("The generated code is", response)
     return response
 
 def generate_corrected_code(previous_code, error_message):
@@ -31,6 +32,7 @@ def generate_corrected_code(previous_code, error_message):
         ]
     )
     response = completion.choices[0].message.content
+    print("The generated corrected code is", response)
     return response
 
 def save_code_to_file(code, filename):
@@ -40,6 +42,7 @@ def save_code_to_file(code, filename):
 def run_manim_script(filename):
     command = ["manim", filename]
     result = subprocess.run(command, capture_output=True, text=True)
+    print("The result is ", result)
     return result
 
 def find_and_move_video():
