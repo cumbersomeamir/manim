@@ -42,7 +42,7 @@ def save_code_to_file(code, filename):
 def run_manim_script(filename):
     command = ["manim", filename]
     try:
-        result = subprocess.run(command, capture_output=True, text=True, timeout=120)
+        result = subprocess.run(command, capture_output=True, text=True)
         print("Command stdout:", result.stdout)
         print("Command stderr:", result.stderr)
         print("The result is", result)
