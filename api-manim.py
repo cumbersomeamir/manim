@@ -100,4 +100,4 @@ def video_story():
         return jsonify({'status': 'success', 'message': 'Animation generated and saved.'}), 200
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=7005)
+    app.run(debug=True, host='0.0.0.0', port=7005, use_reloader=False)
