@@ -41,9 +41,15 @@ def save_code_to_file(code, filename):
 
 def run_manim_script(filename):
     command = ["manim", filename]
-    result = subprocess.run(command, capture_output=True, text=True)
-    print("The result is ", result)
+    try:
+        result = subprocess.run(command, capture_output=True, text=True, timeout=120)
+        print("Command stdout:", result.stdout)
+        print("Command stderr:", result.stderr)
+        print("The result is", result)
+    except Exception as e:
+        print(f"Error running Manim script: {str(e)}")
     return result
+
 
 def find_and_move_video():
     media_dir = os.path.join(os.getcwd(), 'media')
